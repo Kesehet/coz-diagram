@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Diagram</title>
+  <style>
+    /* Add your CSS styles here */
+    #myDiagramDiv {
+      width: 100%;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div id="myDiagramDiv"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/2.1.10/go.js"></script>
+  <script>
+    // JavaScript code for creating the diagram
+    const $ = go.GraphObject.make;
+
+    const myDiagram = new go.Diagram("myDiagramDiv", {
+      "undoManager.isEnabled": true
+    });
+
+    myDiagram.nodeTemplate =
+      $(go.Node, "Auto",
+        $(go.Shape, "Rectangle",
+          {
+            stroke: null,
+            portId: "",
+            cursor: "pointer",
+            fromLinkable: true, fromLinkableSelfNode: true, fromLinkableDuplicates: true,
+            toLinkable: true, toLinkableSelfNode: true, toLinkableDuplicates: true
+          },
+          new go.Binding("fill", "color")),
+        $(go.TextBlock,
+          { margin: 6, font: "18px sans-serif" },
+          new go.Binding("text"))
+      );
+
+    myDiagram.linkTemplate =
+      $(go.Link,
+        {
+          // allow the user to reconnnect existing links:
+          relinkableFrom: true, relinkableTo: true,
+          // draw the link path shorter than normal,
+          // so that it does not interfere with the appearance of the arrowhead
+          toShortLength: 2
+        },
+        $(go.Shape,
+          { strokeWidth: 2 }),
+        $(go.Shape,
+          { toArrow: "Standard", stroke: null })
+      );
+
+    myDiagram.model = new go.GraphLinksModel(
+      [
+        { key: "Alpha", color: "lightblue" },
+        { key: "Beta", color: "orange" },
+        { key: "Gamma", color: "lightgreen" },
+        { key: "Delta", color: "pink" }
+      ],
+      [
+        { from: 1, to: 2 },
+        { from: 1, to: 4 }
+      ]);
+  </script>
+</body>
+</html>
