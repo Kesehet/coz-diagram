@@ -9,7 +9,7 @@ class Canvas {
           height: 600,
           gridSize: 1,
           background: {
-              color: 'rgba(0, 255, 0, 0.3)' // Optional: to visualize the canvas area, you can set a background color
+              color: 'rgba(0, 0, 0, 1)' // Optional: to visualize the canvas area, you can set a background color
           }
       });
   }
