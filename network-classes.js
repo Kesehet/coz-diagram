@@ -16,20 +16,33 @@ class Canvas {
 
   // Example method to add a simple rectangle element to the graph
   addRectangle() {
-      const rect = new joint.shapes.standard.Rectangle();
-      rect.position(100, 30);
-      rect.resize(100, 40);
-      rect.attr({
-          body: {
-              fill: 'blue'
-          },
-          label: {
-              text: 'Hello, JointJS!',
-              fill: 'white'
-          }
-      });
-      rect.addTo(this.graph);
-  }
+    const rect = new joint.shapes.standard.Rectangle();
+    rect.position(100, 30);
+    rect.resize(100, 60); // Increase the height to accommodate the image and text
+    rect.attr({
+        body: {
+            fill: 'blue'
+        },
+        label: {
+            text: 'Your Text Here',
+            fill: 'white',
+            textVerticalAnchor: 'middle', // Vertically center the text
+            textAnchor: 'middle', // Horizontally center the text
+            refX: '50%', // Position the text at 50% of the element's width
+            refY: '50%' // Position the text at 50% of the element's height
+        },
+        image: {
+            'xlink:href': 'https://static-00.iconduck.com/assets.00/server-icon-512x512-06jrsmox.png', // URL to the image
+            width: 48, // Width of the image
+            height: 48, // Height of the image
+            refX: '50%', // Center the image horizontally
+            refX2: -24, // Offset by half the image's width to truly center
+            refY: '30%', // Adjust this to position the image appropriately
+        }
+    });
+    rect.addTo(this.graph);
+}
+
 
   // Similar methods can be added to create different types of elements and links
 }
